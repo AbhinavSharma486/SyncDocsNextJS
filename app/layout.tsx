@@ -4,13 +4,14 @@ import './globals.css';
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
-  title: "Sync docs",
+  title: "SYNC DOCS",
   description: "Your go to collaborative editor"
 };
 
