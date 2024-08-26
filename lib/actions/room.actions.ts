@@ -1,4 +1,3 @@
-'user server';
 
 import { nanoid } from "nanoid";
 import { liveblocks } from "../liveblocks";
@@ -6,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { parseStringify } from "../utils";
 
 export const createDocument = async ({ userId, email }: CreateDocumentParams) => {
+
   const roomId = nanoid();
 
   try {
@@ -19,13 +19,13 @@ export const createDocument = async ({ userId, email }: CreateDocumentParams) =>
       [email]: ['room:write']
     };
 
-    const room = await liveblocks.createRoom("roomId", {
+    const room = await liveblocks.createRoom(roomId, {
       metadata,
       usersAccesses,
       defaultAccesses: []
     });
 
-    revalidatePath('/');
+    revalidatePath("/");
 
     return parseStringify(room);
 
