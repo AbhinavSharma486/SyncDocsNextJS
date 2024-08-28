@@ -2,7 +2,7 @@
 
 import { ClientSideSuspense, RoomProvider } from '@liveblocks/react/suspense';
 import Header from '@/components/Header';
-import { Editor } from '@/src/components/editor/Editor';
+import { Editor } from './editor/Editor';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import ActiveCollaborators from './ActiveCollaborators';
 import { useEffect, useRef, useState } from 'react';
@@ -11,9 +11,8 @@ import Image from 'next/image';
 import { updateDocument } from '@/lib/actions/room.actions';
 import Loader from './Loader';
 
-const CollaborativeRoom = ({ roomId, roomMetadata }: CollaborativeRoomProps) => {
+const CollaborativeRoom = ({ roomId, roomMetadata, users, currentUserType }: CollaborativeRoomProps) => {
 
-  const currentUserType = 'editor';
 
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -124,7 +123,7 @@ const CollaborativeRoom = ({ roomId, roomMetadata }: CollaborativeRoomProps) => 
               </SignedIn>
             </div>
           </Header>
-          <Editor />
+          <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
       </ClientSideSuspense>
     </RoomProvider >
