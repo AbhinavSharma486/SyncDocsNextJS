@@ -16,6 +16,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import UserTypeSelector from "./UserTypeSelector";
 import Collaborator from "./Collaborator";
+import { updateDocumentAccess } from "@/lib/actions/room.actions";
 
 const ShareModel = ({ roomId, collaborators, creatorId, currentUserType }: ShareDocumentDialogProps) => {
   const user = useSelf();
@@ -26,7 +27,18 @@ const ShareModel = ({ roomId, collaborators, creatorId, currentUserType }: Share
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState<UserType>('viewer');
 
-  const shareDocumentHandler = async () => { };
+  const shareDocumentHandler = async () => {
+    setLoading(true);
+
+    await updateDocumentAccess({
+      roomId,
+      email,
+      userType: userType as UserType,
+      updatedBy: user.info as User
+    });
+
+    setLoading(false);
+  };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
@@ -63,9 +75,7 @@ const ShareModel = ({ roomId, collaborators, creatorId, currentUserType }: Share
               onChange={(e) => setEmail(e.target.value)}
               className="share-input"
             />
-            <UserTypeSelector
-              userType={userType}
-              setUserType={setUserType}
+            <UserTypeSelector userType={userType} setUserType={setUserType}
             />
           </div>
           <Button
@@ -74,9 +84,7 @@ const ShareModel = ({ roomId, collaborators, creatorId, currentUserType }: Share
             className="gradient-blue flex h-full gap-1 px-5"
             disabled={loading}
           >
-            {
-              loading ? 'Sending...' : 'Invite'
-            }
+            {loading ? 'Sending...' : 'Invite'}
           </Button>
         </div>
 
@@ -90,7 +98,7 @@ const ShareModel = ({ roomId, collaborators, creatorId, currentUserType }: Share
                   creatorId={creatorId}
                   email={collaborator.email}
                   collaborator={collaborator}
-                  user={user.info}
+                  user={user.info as User}
                 />
               ))
             }
