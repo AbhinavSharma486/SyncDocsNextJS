@@ -1,6 +1,6 @@
 import { SignIn } from '@clerk/nextjs';
 
-const SingInPage = () => {
+const SignInPage = () => {
   return (
     <main className='auth-page'>
       <SignIn />
@@ -8,4 +8,4 @@ const SingInPage = () => {
   );
 };
 
-export default SingInPage;
+export default SignInPage;
