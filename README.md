@@ -2,6 +2,10 @@
 
 A modern, feature-rich real-time collaborative document editing platform built with Next.js, Liveblocks, and Lexical editor. Sync Docs enables teams to create, edit, and collaborate on documents in real-time with advanced features like comments, notifications, and user management.
 
+## 🚀 Live Demo
+
+- **Live Demo**: [https://sync-docs-next-js.vercel.app/sign-in](https://sync-docs-next-js.vercel.app/sign-in)
+
 ## 🚀 Features
 
 ### Core Features
